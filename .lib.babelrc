@@ -1,0 +1,11 @@
+{
+  "presets": [
+    ["@babel/env", {
+      "targets": {
+        "node": "10.12.0",
+        "browsers": [ "> 1%", "last 2 versions" ]
+      }
+    }]
+  ],
+  "sourceMaps": "both"
+}
