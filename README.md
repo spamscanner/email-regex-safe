@@ -134,7 +134,7 @@ Since we cannot use regular expression's "negative lookbehinds" functionality (d
 [MIT](LICENSE) © [Nick Baugh](http://niftylettuce.com/)
 
 
-## 
+##
 
 [npm]: https://www.npmjs.com/
 
