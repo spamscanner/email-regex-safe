@@ -14,7 +14,7 @@
     "Nick Baugh <niftylettuce@gmail.com> (http://niftylettuce.com/)"
   ],
   "dependencies": {
-    "ip-regex": "4.1.0",
+    "ip-regex": "^4.3.0",
     "re2": "^1.15.9",
     "tlds": "^1.217.0"
   },
