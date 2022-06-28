@@ -7,7 +7,7 @@
 [![license](https://img.shields.io/github/license/niftylettuce/email-regex-safe.svg)](LICENSE)
 [![npm downloads](https://img.shields.io/npm/dt/email-regex-safe.svg)](https://npm.im/email-regex-safe)
 
-> Regular expression matching for email addresses. Maintained, configurable, more accurate, and browser-friendly alternative to [email-regex][]. Works in Node v10.12.0+ and browsers. **Made for [Spam Scanner][spam-scanner] and [Forward Email][forward-email]**
+> Regular expression matching for email addresses. Maintained, configurable, more accurate, and browser-friendly alternative to [email-regex][]. Works in Node v14+ and browsers. **Made for [Spam Scanner][spam-scanner] and [Forward Email][forward-email]**
 
 
 ## Table of Contents
