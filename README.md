@@ -1,7 +1,6 @@
 # email-regex-safe
 
-[![build status](https://img.shields.io/travis/com/niftylettuce/email-regex-safe.svg)](https://travis-ci.com/niftylettuce/email-regex-safe)
-[![code coverage](https://img.shields.io/codecov/c/github/niftylettuce/email-regex-safe.svg)](https://codecov.io/gh/niftylettuce/email-regex-safe)
+[![build status](https://github.com/spamscanner/email-regex-safe/actions/workflows/ci.yml/badge.svg)](https://github.com/spamscanner/email-regex-safe/actions/workflows/ci.yml)
 [![code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![made with lass](https://img.shields.io/badge/made_with-lass-95CC28.svg)](https://lass.js.org)
@@ -27,7 +26,7 @@
 
 ## Foreword
 
-Previously I was using [email-regex][] through my work on [Spam Scanner][spam-scanner] and [Forward Email][forward-email].  However this package has [too many issues](https://github.com/sindresorhus/email-regex/issues/9) and [false positives](https://github.com/sindresorhus/email-regex/issues/2).
+Previously we were using [email-regex][] through our work on [Spam Scanner][spam-scanner] and [Forward Email][forward-email].  However this package has [too many issues](https://github.com/sindresorhus/email-regex/issues/9) and [false positives](https://github.com/sindresorhus/email-regex/issues/2).
 
 This package should hopefully more closely resemble real-world intended usage of an email regular expression, and also let you configure several [Options](#options).  Please check out [Forward Email][forward-email] if this package helped you, and explore our source code on GitHub which shows how we use this package.
 
@@ -36,24 +35,18 @@ This package should hopefully more closely resemble real-world intended usage of
 
 ## Install
 
+**NOTE:** As of v2.0.0 you must also install `re2` as a peer dependency.
+
 [npm][]:
 
 ```sh
-npm install email-regex-safe
-```
-
-[yarn][]:
-
-```sh
-yarn add email-regex-safe
+npm install email-regex-safe re2
 ```
 
 
 ## Usage
 
 ### Node
-
-This package automatically includes [RE2][] for regex optimization and vulnerability protection.  You will not have to manually wrap your URL regular expressions with `new RE2(emailRegex())` anymore through `email-regex-safe` (we do it automatically for you).
 
 ```js
 const emailRegexSafe = require('email-regex-safe');
@@ -137,8 +130,6 @@ Since we cannot use regular expression's "negative lookbehinds" functionality (d
 ##
 
 [npm]: https://www.npmjs.com/
-
-[yarn]: https://yarnpkg.com/
 
 [re2]: https://github.com/uhop/node-re2
 

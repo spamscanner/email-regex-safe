@@ -3,6 +3,7 @@ const test = require('ava');
 const emailRegexSafe = require('..');
 
 const string = `
+bob.foo-bar@test.com
 __boop@beep.com
 foo@foo.com
 foo@f.com
@@ -33,8 +34,11 @@ foo@fe.com admin@2606:4700:4700::1111
 fe@fe az@as test@1.2.3.4 foo@com.jpeg
 foo@com.jpeg`;
 
-test('parses matches', (t) => {
-  t.deepEqual(string.match(emailRegexSafe()), [
+test('gmail matches', (t) => {
+  const match = string.match(emailRegexSafe());
+  t.log(match);
+  t.deepEqual(match, [
+    'bar@test.com',
     'boop@beep.com',
     'foo@foo.com',
     'foo@f.com',
@@ -56,6 +60,48 @@ test('parses matches', (t) => {
     'some_logo@2x.jp',
     'foobar@2x.jp',
     'beep@example.ai',
+    'image001.png@01bazz23.mx',
+    'image002.png@03j570cf.ee',
+    'image000.png@03j570cfzaaaazz.ee',
+    'image005.png@03j570cf.es',
+    'example.@gmail.com',
+    'foo+test@gmail.com',
+    'text@example.com',
+    'foo@bar.com',
+    'baz@boop.com',
+    'foo@fe.com',
+    'test@1.2.3.4',
+    'foo@com.jp',
+    'foo@com.jp'
+  ]);
+});
+
+test('non-gmail matches', (t) => {
+  const match = string.match(emailRegexSafe({ gmail: false }));
+  t.log(match);
+  t.deepEqual(match, [
+    'bob.foo-bar@test.com',
+    'boop@beep.com',
+    'foo@foo.com',
+    'foo@f.com',
+    'some@sub.domain.jpg.co.uk.com.jp',
+    'boop@beep.com',
+    'bepp.test@boop.com',
+    'beep....foo@foo.com',
+    'beep..@foo.com',
+    'beep@bar.com',
+    'beep.boop.boop.@foo.com',
+    'beep@boop.com',
+    'foobar@gmail.com',
+    'foo@gmail.com',
+    'foo@gmail.com',
+    'test.com+@testtest.com',
+    'subscribe.example.com/subscribe.aspx?foo=zaaaa@example.io',
+    'beep=foo124123@example.nl',
+    'beep@test.co.uk',
+    'images/some_logo@2x.jp',
+    'images/foobar@2x.jp',
+    'beep.boop.net/foo.cfm?email=beep@example.ai',
     'image001.png@01bazz23.mx',
     'image002.png@03j570cf.ee',
     'image000.png@03j570cfzaaaazz.ee',

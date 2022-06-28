@@ -40,8 +40,8 @@ module.exports = (options) => {
       // note that we are parsing for emails, not enforcing username match, so we allow +
       '[^\\W_](?:[\\w\\.\\+]+)' // NOTE: we don't end with `[^\\W]` here since Gmail doesn't do this in webmail
     : options.utf8
-    ? "[^\\W_](?:[a-z\\d!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]+)"
-    : "[^\\W_](?:[a-z\\d!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~]+)";
+    ? "[^\\W_](?:[a-z\\d!#\\$%&'\\.\\*\\+\\-\\/=\\?\\^_`{\\|}~\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]+)"
+    : "[^\\W_](?:[a-z\\d!#\\$%&'\\.\\*\\+\\-\\/=\\?\\^_`{\\|}~]+)";
 
   let regex = `(?:${emailUserPart}@(?:`;
   if (options.localhost) regex += 'localhost|';

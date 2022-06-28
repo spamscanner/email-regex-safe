@@ -14,37 +14,37 @@
     "Nick Baugh <niftylettuce@gmail.com> (http://niftylettuce.com/)"
   ],
   "dependencies": {
-    "ip-regex": "^4.3.0",
-    "re2": "^1.15.9",
-    "tlds": "^1.217.0"
+    "ip-regex": "4",
+    "tlds": "^1.231.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.16",
-    "@babel/core": "^7.12.16",
-    "@babel/preset-env": "^7.12.16",
-    "@commitlint/cli": "latest",
-    "@commitlint/config-conventional": "latest",
-    "ava": "latest",
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "ava": "^4.3.0",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
-    "codecov": "latest",
-    "cross-env": "latest",
-    "eslint": "latest",
-    "eslint-config-xo-lass": "latest",
-    "eslint-plugin-compat": "^3.9.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.18.0",
+    "eslint-config-xo-lass": "^2.0.1",
+    "eslint-plugin-compat": "^4.0.2",
     "eslint-plugin-node": "^11.1.0",
-    "fixpack": "latest",
-    "husky": "latest",
+    "fixpack": "^4.0.0",
+    "husky": "^8.0.1",
     "jsdom": "15",
-    "lint-staged": "latest",
-    "nyc": "latest",
-    "remark-cli": "latest",
-    "remark-preset-github": "latest",
-    "tinyify": "^3.0.0",
-    "xo": "latest"
+    "lint-staged": "^13.0.3",
+    "nyc": "^15.1.0",
+    "re2": "^1.17.7",
+    "remark-cli": "^11.0.0",
+    "remark-preset-github": "^4.0.4",
+    "rimraf": "^3.0.2",
+    "tinyify": "^3.1.0",
+    "xo": "^0.50.0"
   },
   "engines": {
-    "node": ">= 10.12.0"
+    "node": ">=14"
   },
   "files": [
     "lib",
@@ -105,6 +105,14 @@
   ],
   "license": "MIT",
   "main": "lib/index.js",
+  "peerDependencies": {
+    "re2": "^1.17.2"
+  },
+  "peerDependenciesMeta": {
+    "re2": {
+      "optional": true
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/niftylettuce/email-regex-safe"
@@ -116,24 +124,17 @@
     "build:clean": "rimraf lib dist",
     "build:dist": "npm run browserify && npm run minify",
     "build:lib": "babel --config-file ./.lib.babelrc src --out-dir lib",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "lint": "yarn run lint:js && yarn run lint:md && yarn run lint:lib && yarn run lint:dist",
+    "lint": "npm run lint:js && npm run lint:md && npm run lint:pkg && npm run lint:lib && npm run lint:dist",
     "lint:dist": "eslint --no-inline-config -c .dist.eslintrc dist",
-    "lint:js": "xo",
+    "lint:js": "xo --fix",
     "lint:lib": "eslint -c .lib.eslintrc lib",
     "lint:md": "remark . -qfo",
+    "lint:pkg": "fixpack",
     "minify": "cross-env NODE_ENV=production browserify src/index.js -o dist/email-regex-safe.min.js -s emailRegexSafe -g [ babelify --configFile ./.dist.babelrc ] -p tinyify",
     "nyc": "cross-env NODE_ENV=test nyc ava",
-    "pretest": "yarn run build && yarn run lint",
-    "test": "cross-env NODE_ENV=test ava",
-    "test-coverage": "cross-env NODE_ENV=test nyc yarn run test"
+    "prepare": "husky install",
+    "pretest": "npm run build && npm run lint",
+    "test": "npm run test-coverage"
   },
-  "unpkg": "dist/email-regex-safe.min.js",
-  "xo": {
-    "prettier": true,
-    "space": true,
-    "extends": [
-      "xo-lass"
-    ]
-  }
+  "unpkg": "dist/email-regex-safe.min.js"
 }
