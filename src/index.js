@@ -8,18 +8,21 @@ const ipv4 = ipRegex.v4().source;
 const ipv6 = ipRegex.v6().source;
 
 module.exports = (options) => {
-  options = {
-    exact: false,
-    strict: false,
-    gmail: true,
-    utf8: true,
-    localhost: true,
-    ipv4: true,
-    ipv6: false,
-    tlds,
-    returnString: false,
-    ...options
-  };
+  // eslint-disable-next-line prefer-object-spread
+  options = Object.assign(
+    {
+      exact: false,
+      strict: false,
+      gmail: true,
+      utf8: true,
+      localhost: true,
+      ipv4: true,
+      ipv6: false,
+      tlds,
+      returnString: false
+    },
+    options
+  );
 
   const host = '(?:(?:[a-z\\u00a1-\\uffff0-9][-_]*)*[a-z\\u00a1-\\uffff0-9]+)';
   const domain =

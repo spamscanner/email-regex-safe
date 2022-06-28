@@ -118,7 +118,6 @@
     "url": "https://github.com/niftylettuce/email-regex-safe"
   },
   "scripts": {
-    "ava": "cross-env NODE_ENV=test ava",
     "browserify": "browserify src/index.js -o dist/email-regex-safe.js -s emailRegexSafe -g [ babelify --configFile ./.dist.babelrc ]",
     "build": "npm run build:clean && npm run build:lib && npm run build:dist",
     "build:clean": "rimraf lib dist",
@@ -131,10 +130,9 @@
     "lint:md": "remark . -qfo",
     "lint:pkg": "fixpack",
     "minify": "cross-env NODE_ENV=production browserify src/index.js -o dist/email-regex-safe.min.js -s emailRegexSafe -g [ babelify --configFile ./.dist.babelrc ] -p tinyify",
-    "nyc": "cross-env NODE_ENV=test nyc ava",
     "prepare": "husky install",
     "pretest": "npm run build && npm run lint",
-    "test": "npm run test-coverage"
+    "test": "cross-env NODE_ENV=test nyc ava"
   },
   "unpkg": "dist/email-regex-safe.min.js"
 }
