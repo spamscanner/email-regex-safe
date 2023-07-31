@@ -1,5 +1,4 @@
 const test = require('ava');
-
 const emailRegexSafe = require('..');
 
 const string = `

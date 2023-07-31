@@ -4,7 +4,7 @@
 [![code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![made with lass](https://img.shields.io/badge/made_with-lass-95CC28.svg)](https://lass.js.org)
-[![license](https://img.shields.io/github/license/niftylettuce/email-regex-safe.svg)](LICENSE)
+[![license](https://img.shields.io/github/license/spamscanner/email-regex-safe.svg)](LICENSE)
 [![npm downloads](https://img.shields.io/npm/dt/email-regex-safe.svg)](https://npm.im/email-regex-safe)
 
 > Regular expression matching for email addresses. Maintained, configurable, more accurate, and browser-friendly alternative to [email-regex][]. Works in Node v14+ and browsers. **Made for [Spam Scanner][spam-scanner] and [Forward Email][forward-email]**
@@ -117,14 +117,14 @@ Since we cannot use regular expression's "negative lookbehinds" functionality (d
 
 ## Contributors
 
-| Name           | Website                    |
-| -------------- | -------------------------- |
-| **Nick Baugh** | <http://niftylettuce.com/> |
+| Name              | Website                    |
+| ----------------- | -------------------------- |
+| **Forward Email** | <https://forwardemail.net> |
 
 
 ## License
 
-[MIT](LICENSE) © [Nick Baugh](http://niftylettuce.com/)
+[MIT](LICENSE) © [Forward Email](https://forwardemail.net)
 
 
 ##
