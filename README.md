@@ -35,7 +35,7 @@ This package should hopefully more closely resemble real-world intended usage of
 
 ## Install
 
-**NOTE:** As of v2.0.0 you must also install `re2` as a peer dependency.
+**NOTE:** As of v2.0.0 you must also install `re2` as a peer dependency.  As of v3.0.0 `re2` is optional and it will default to using `RegExp`.
 
 [npm][]:
 
