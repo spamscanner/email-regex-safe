@@ -1,45 +1,58 @@
 const ipRegex = require('ip-regex');
 const tlds = require('tlds');
 
-/* istanbul ignore next */
-const SafeRegExp = (() => {
-  try {
-    const RE2 = require('re2');
-    return typeof RE2 === 'function' ? RE2 : RegExp;
-  } catch {
-    return RegExp;
-  }
-})();
 const ipv4 = ipRegex.v4().source;
 const ipv6 = ipRegex.v6().source;
+const host = '(?:(?:[a-z\\u00a1-\\uffff0-9][-_]*)*[a-z\\u00a1-\\uffff0-9]+)';
+const domain = '(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*';
+const strictTld = '(?:[a-z\\u00a1-\\uffff]{2,})';
+const defaultTlds = `(?:${tlds.sort((a, b) => b.length - a.length).join('|')})`;
+
+let RE2;
+let hasRE2;
 
 module.exports = (options) => {
-  // eslint-disable-next-line prefer-object-spread
-  options = Object.assign(
-    {
-      exact: false,
-      strict: false,
-      gmail: true,
-      utf8: true,
-      localhost: true,
-      ipv4: true,
-      ipv6: false,
-      tlds,
-      returnString: false
-    },
-    options
-  );
+  options = {
+    //
+    // attempt to use re2, if set to false will use RegExp
+    // (we did this approach because we don't want to load in-memory re2 if users don't want it)
+    // <https://github.com/spamscanner/url-regex-safe/issues/28>
+    //
+    re2: true,
+    exact: false,
+    strict: false,
+    gmail: true,
+    utf8: true,
+    localhost: true,
+    ipv4: true,
+    ipv6: false,
+    returnString: false,
+    ...options
+  };
 
-  const host = '(?:(?:[a-z\\u00a1-\\uffff0-9][-_]*)*[a-z\\u00a1-\\uffff0-9]+)';
-  const domain =
-    '(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*';
+  /* istanbul ignore next */
+  const SafeRegExp =
+    options.re2 && hasRE2 !== false
+      ? (() => {
+          if (typeof RE2 === 'function') return RE2;
+          try {
+            RE2 = require('re2');
+            return typeof RE2 === 'function' ? RE2 : RegExp;
+          } catch {
+            hasRE2 = false;
+            return RegExp;
+          }
+        })()
+      : RegExp;
 
   // Add ability to pass custom list of tlds
   // <https://github.com/kevva/url-regex/pull/66>
   const tld = `(?:\\.${
     options.strict
-      ? '(?:[a-z\\u00a1-\\uffff]{2,})'
-      : `(?:${options.tlds.sort((a, b) => b.length - a.length).join('|')})`
+      ? strictTld
+      : options.tlds
+      ? `(?:${options.tlds.sort((a, b) => b.length - a.length).join('|')})`
+      : defaultTlds
   })`;
 
   // <https://github.com/validatorjs/validator.js/blob/master/src/lib/isEmail.js>
